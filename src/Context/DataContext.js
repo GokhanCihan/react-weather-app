@@ -4,7 +4,8 @@ const DataContext = createContext();
 
 const DataProvider = ({children}) => {
 
-    
+    /*  GET data from the API 
+        Pass it into the value */
     
     return(
         <DataContext.Provider value="" >

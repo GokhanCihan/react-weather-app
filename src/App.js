@@ -1,11 +1,12 @@
 import './App.css';
-import DataContext from './Context/DataContext';
+import DataProvider from './Context/DataContext';
+import Main from './Components/Main/Main';
 
 function App() {
   return (
-    <DataContext>
-
-    </DataContext>
+    <DataProvider>
+      <Main />
+    </DataProvider>
   )
 }
 

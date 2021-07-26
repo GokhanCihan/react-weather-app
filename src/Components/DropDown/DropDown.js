@@ -5,11 +5,10 @@ import { useData } from '../../Context/DataContext'
 function DropDown() {
     const [selectValue, setSelectValue] = useState("ANKARA")
     const values = useData();
-
+    
     /* matches selected city's name with names from local .json to get coordinates */
     const onChange = (e) => {
         setSelectValue(e.target.value)
-        console.log(selectValue);
         values.citiesArr.forEach(element => {
             if (element.name === e.target.value) {
                 values.setGeoCode(
@@ -26,7 +25,9 @@ function DropDown() {
     return (
         <div>
             <select value={selectValue} onChange= {onChange} >
-                {values.citiesArr.map((city, index) => <option key={index} value={city.name}>{city.name}</option>)}
+                {values.citiesArr.map((city, index) => {
+                    return <option key={index} value={city.name}>{city.name}</option>
+                })}  
             </select>
         </div>
     )

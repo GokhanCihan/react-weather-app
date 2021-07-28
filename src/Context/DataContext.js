@@ -31,8 +31,9 @@ const [weekDays, dayOfMonth] = findDaysFrom(today)
 const DataProvider = ({children}) => {
     const [geoCode, setGeoCode] = useState({name: 'ANKARA', lat: 39.92077, long:32.85411})
     const [temperature, setTemperature] = useState([])
+    const [iconType, setIconType] = useState("")
     const [citiesArr, setCitiesArr] = useState([])
-    const APIkey = 'eaafda8a2ec0aad68e0bdfe907387d'
+    const APIkey = 'eaafda8a2ec0aad68e0bdfe907387d6a'
 
     /* Geolocation API returns user's location */
     const getLocation = async () => new Promise ((resolve,reject) => {
@@ -62,18 +63,26 @@ const DataProvider = ({children}) => {
     /* wheather data from API */
     const getWeatherData = async () => {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${geoCode.lat}&lon=${geoCode.long}&exclude=hourly,minutely,alerts&units=metric&lang=tr&appid=${APIkey}`)
-        const extractData = (nthDay) => (
+        const extractData = (nthDay) => ([
             {
                 max: response.data.daily[nthDay].temp.max, 
                 min: response.data.daily[nthDay].temp.min,
                 description : response.data.daily[nthDay].weather[0].description
+            },
+                response.data.daily[nthDay].weather[0].icon
+        ])
+            setTemperature(() => {
+                let temp = [];
+                for (let i = 0; i < 7; i++) {temp.push(extractData(i)[0])}
+                return temp
+            })
+            setIconType(() => {
+                let temp = [];
+                for (let i = 0; i < 7; i++) {temp.push(extractData(i)[1])}
+                console.log(temp);
+                return temp
             }
             )
-            setTemperature(() => {
-                const temps = [];
-                for (let i = 0; i < 7; i++) {temps.push(extractData(i))}
-                return temps
-            })
         }
 
     useEffect(() => {
@@ -89,6 +98,7 @@ const DataProvider = ({children}) => {
         temperature,
         citiesArr,
         geoCode,
+        iconType,
         setGeoCode,
         weekDays,
         dayOfMonth

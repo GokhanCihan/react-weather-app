@@ -23,7 +23,7 @@ function DropDown() {
     }
 
     return (
-        <div>
+        <div className="d-flex justify-content-center">
             <select value={selectValue} onChange= {onChange} >
                 {values.citiesArr.map((city, index) => {
                     return <option key={index} value={city.name}>{city.name}</option>

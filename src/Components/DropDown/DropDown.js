@@ -23,11 +23,14 @@ function DropDown() {
     }
 
     return (
-        <div className="d-flex justify-content-center">
+        <div className="dropdown">
             <select value={selectValue} onChange= {onChange} >
                 {values.citiesArr.map((city, index) => {
                     return <option key={index} value={city.name}>{city.name}</option>
-                })}  
+                })}
+                <option value={(values.userLocation !== "")?"KONUMUNUZDA":""} >{(values.userLocation !== "")?"KONUMUNUZDA":""}</option>
+                    
+                
             </select>
         </div>
     )

@@ -9,6 +9,7 @@ function DropDown() {
     /* matches selected city's name with names from local .json to get coordinates */
     const onChange = (e) => {
         setSelectValue(e.target.value)
+        values.setLocMessage(false)
         values.citiesArr.forEach(element => {
             if (element.name === e.target.value) {
                 values.setGeoCode(
@@ -23,15 +24,15 @@ function DropDown() {
     }
 
     return (
-        <div className="dropdown">
+        <div className="dropdown d-block text-center">
             <select value={selectValue} onChange= {onChange} >
                 {values.citiesArr.map((city, index) => {
                     return <option key={index} value={city.name}>{city.name}</option>
                 })}
-                <option value={(values.userLocation !== "")?"KONUMUNUZDA":""} >{(values.userLocation !== "")?"KONUMUNUZDA":""}</option>
-                    
-                
             </select>
+            <div>
+                {(values.LocMessage)?("Konumunuzdaki hava durumu görüntüleniyor."):(null)}
+            </div>
         </div>
     )
 }

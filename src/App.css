@@ -23,7 +23,8 @@ body{
     display: flex;
     box-sizing: border-box;
     width: 7rem;
-    border-style:solid;
+    background-color: lightgrey;
+    border: 2px solid black;
     border-radius: 0%;
 }
 
@@ -32,12 +33,12 @@ body{
     padding-right: 5px;
 }
 
-.days {
+.header-day {
     font-size: 12px;
     padding-left: 2px;
 }
 
-.date {
+.header-date {
     font-size: 10px;
     float: right;
 }

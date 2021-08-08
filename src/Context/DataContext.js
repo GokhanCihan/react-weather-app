@@ -33,6 +33,7 @@ const DataProvider = ({children}) => {
     const [temperature, setTemperature] = useState([])
     const [iconType, setIconType] = useState("")
     const [citiesArr, setCitiesArr] = useState([])
+    const [LocMessage, setLocMessage] = useState(false)
     const APIkey = 'eaafda8a2ec0aad68e0bdfe907387d6a'
 
     /* Geolocation API returns user's location */
@@ -42,7 +43,10 @@ const DataProvider = ({children}) => {
             const longitude = position.coords.longitude;
             const userLocation = {name: 'Konumunuz', lat: latitude, long: longitude}
             alert('Konumunuz bulundu')
-            resolve(values.setGeoCode(userLocation))
+            resolve(
+                setGeoCode(userLocation),
+                setLocMessage(true)      
+            )
         }
         function error() {
             reject('Konumunuz bulunamadı')    
@@ -97,9 +101,11 @@ const DataProvider = ({children}) => {
     const values = {
         temperature,
         citiesArr,
-        geoCode,
         iconType,
+        geoCode,
+        LocMessage,
         setGeoCode,
+        setLocMessage,
         weekDays,
         dayOfMonth
     }
